@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // MANDAMOS LLAMAR A LOS METODOS.
+        SyncService service = new SyncService();
+        service.validateSyc(this);
+        service.execute(); //aqui ponemos usuario o resto de argumentos.
     }
 
     private class SyncService extends AsyncTask<String, String, Boolean> {
