@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,10 +47,20 @@ public class MainActivity extends AppCompatActivity {
 
 
             try {
-                Log.d("Conectaados a : ", urlCompose);
+                Log.d("Conectados a : ", urlCompose);
                 HttpResponse response = httpClient.execute(get);
                 String respStr= EntityUtils.toString(response.getEntity());
                 JSONObject respJSON = new JSONObject(respStr);
+                // este objeto solo vive aqui ...
+                // miramos el objeto JSON que nos viene. siempre hay que conocer la estructura
+                if(respJSON.getBoolean("success")){
+                    responseJSON=respJSON;
+
+                }else{
+                    result= false;
+                }
+
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -69,6 +80,24 @@ public class MainActivity extends AppCompatActivity {
         }
         protected void onPostExecute(){
             //recibir respuesta
+            if(dialog.isShowing()){
+                dialog.dismiss();
+            }
+            if(result){
+                try {
+                    JSONArray datos = responseJSON.getJSONArray("arrayResults");
+                    // ahora hay que sacar los datos ....
+                    //json array no permiten foreach que seria mejor
+                    for (int i=0; i<data.length(); i++){
+                        JSONObject gasJASON= (JSONObject) data.get(i);
+                        Log.d("Estacion: ", gasJSON.getString("BUSINESS_NAME"));
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
         }
 
