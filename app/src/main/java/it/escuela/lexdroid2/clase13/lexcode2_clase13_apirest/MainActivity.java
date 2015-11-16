@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 // este objeto solo vive aqui ...
                 // miramos el objeto JSON que nos viene. siempre hay que conocer la estructura
                 if(respJSON.getBoolean("success")){
+                    Log.d("paso por","datos");
                     responseJSON=respJSON;
 
                 }else{
@@ -83,18 +84,18 @@ public class MainActivity extends AppCompatActivity {
             this.dialog.show();
 
         }
-        protected void onPostExecute(){
+        protected void onPostExecute(Boolean result){
             //recibir respuesta
             if(dialog.isShowing()){
                 dialog.dismiss();
             }
             if(result){
                 try {
-                    JSONArray datos = responseJSON.getJSONArray("arrayResults");
+                    JSONArray data = responseJSON.getJSONArray("arrayResults");
                     // ahora hay que sacar los datos ....
                     //json array no permiten foreach que seria mejor
                     for (int i=0; i<data.length(); i++){
-                        JSONObject gasJASON= (JSONObject) data.get(i);
+                        JSONObject gasJSON= (JSONObject) data.get(i);
                         Log.d("Estacion: ", gasJSON.getString("BUSINESS_NAME"));
                     }
 
