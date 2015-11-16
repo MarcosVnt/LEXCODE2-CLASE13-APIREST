@@ -21,6 +21,9 @@ import cz.msebera.android.httpclient.util.EntityUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    //ingscjoshua@gmail.com
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
         protected Boolean doInBackground(String... params){
             boolean result = true;
             HttpClient httpClient = new DefaultHttpClient();
-            urlCompose="http://gs500.mx/AppGeolocalizacion/GetStations.php?token=3b120d6dd087042cc46bfc0b94b07382";
+            urlCompose="http://g500.mx/AppGeolocalizacion/GetStations.php?token=3b120d6dd087042cc46bfc0b94b07382";
             HttpGet get= new HttpGet(urlCompose);
+            Log.d("11111111111 a : ", urlCompose);
             get.setHeader("content-type", "application/json");
 
 
